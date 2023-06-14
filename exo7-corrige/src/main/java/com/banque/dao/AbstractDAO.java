@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import com.banque.dao.ex.ExceptionDao;
 import com.banque.entity.IEntity;
@@ -29,14 +31,19 @@ import com.banque.entity.IEntity;
  * @param <T>
  *            la cible du DAO
  */
+@Repository
 public abstract class AbstractDAO<T extends IEntity> implements Serializable,
 IDAO<T> {
 
 	private static final long serialVersionUID = 1L;
-	private final String dbDriver ;
-	private final String dbUrl ;
-	private final String dbLogin;
-	private final String dbPwd ;
+	@Value("${db.driver}")
+	private  String dbDriver ;
+	@Value("${db.url}")
+	private  String dbUrl ;
+	@Value("${db.login}")
+	private  String dbLogin;
+	@Value("${db.password}")
+	private  String dbPwd ;
 
 	protected Log LOG = LogFactory.getLog(this.getClass());
 
@@ -50,6 +57,16 @@ IDAO<T> {
 		this.dbLogin = dbLogin;
 		this.dbPwd = dbPwd;
 	}
+	
+	
+	
+	public AbstractDAO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public abstract String getTableName();
 

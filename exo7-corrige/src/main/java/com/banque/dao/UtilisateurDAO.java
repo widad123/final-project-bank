@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.banque.dao.ex.ExceptionDao;
 import com.banque.entity.IUtilisateurEntity;
 import com.banque.entity.UtilisateurEntity;
@@ -19,6 +21,7 @@ import com.banque.entity.UtilisateurEntity;
 /**
  * Gestion des utilisateurs.
  */
+@Repository
 public class UtilisateurDAO extends AbstractDAO<IUtilisateurEntity> implements
 IUtilisateurDAO {
 
@@ -32,6 +35,15 @@ IUtilisateurDAO {
 		super(dbDriver, dbUrl, dbLogin, dbPwd);
 	}
 	
+	
+	
+	public UtilisateurDAO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public String getTableName() {
 		return "utilisateur";

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.stereotype.Repository;
+
 import com.banque.dao.ex.ExceptionDao;
 import com.banque.entity.CompteEntity;
 import com.banque.entity.ICompteEntity;
@@ -18,6 +20,7 @@ import com.banque.entity.ICompteEntity;
 /**
  * Gestion des comptes.
  */
+@Repository
 public class CompteDAO extends AbstractDAO<ICompteEntity> implements ICompteDAO {
 
 	private static final long serialVersionUID = 1L;
@@ -26,10 +29,18 @@ public class CompteDAO extends AbstractDAO<ICompteEntity> implements ICompteDAO 
 	 * Constructeur de l'objet.
 	 */
 	
-
 	public CompteDAO(String dbDriver, String dbUrl, String dbLogin, String dbPwd) {
 		super(dbDriver, dbUrl, dbLogin, dbPwd);
 	}
+	
+	
+
+	public CompteDAO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public String getTableName() {

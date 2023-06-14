@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:c="http://www.springframework.org/schema/c"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
-	   http://www.springframework.org/schema/beans/spring-beans.xsd
-	   http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
-
-
-	<context:property-placeholder location="database.properties"/>
-
-	<bean id="abstractDao" class="com.banque.dao.AbstractDAO"  abstract="true"
-			c:dbDriver="${db.driver}" c:dbUrl="${db.url}" 
-			c:dbLogin="${db.login}" c:dbPwd="${db.password}"/>
-			
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<bean id="utilisateurDao" class="com.banque.dao.UtilisateurDAO" parent="abstractDao"/>
-	<bean id="compteDao" class="com.banque.dao.CompteDAO" parent="abstractDao"/>
-	<bean id="operationDao" class="com.banque.dao.OperationDAO" parent="abstractDao"/>
+	   
+	<context:property-placeholder location="database.properties" />
+	
+	<context:component-scan base-package="com.banque.dao, com.banque.service" />
 
 </beans>

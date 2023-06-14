@@ -9,16 +9,11 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.banque.dao.IUtilisateurDAO;
 import com.banque.entity.ICompteEntity;
 import com.banque.entity.IUtilisateurEntity;
-import com.banque.service.AuthentificationService;
-import com.banque.service.CompteService;
 import com.banque.service.IAuthentificationService;
 import com.banque.service.ICompteService;
 import com.banque.service.IOperationService;
-import com.banque.service.OperationService;
 
 /**
  * Exemple.
@@ -40,7 +35,7 @@ public final class Main {
 		ClassPathXmlApplicationContext appContext = null; 
 		try {
 			
-			appContext = new ClassPathXmlApplicationContext("data-context.xml", "service-context.xml");
+			appContext = new ClassPathXmlApplicationContext("data-context.xml");
 
 			// On instancie le service authentification afin de récupérer un
 			// utilisateur

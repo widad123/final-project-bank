@@ -8,6 +8,9 @@ package com.banque.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.banque.dao.CompteDAO;
 import com.banque.dao.ICompteDAO;
 import com.banque.dao.ex.ExceptionDao;
@@ -19,9 +22,10 @@ import com.banque.service.ex.ErreurTechniqueException;
 /**
  * Gestion des comptes.
  */
+@Service
 public class CompteService extends AbstractService implements ICompteService {
-
-	private ICompteDAO compteDao;
+	@Autowired
+	private ICompteDAO compteDAO;
 
 	/**
 	 * Constructeur de l'objet.
@@ -35,8 +39,8 @@ public class CompteService extends AbstractService implements ICompteService {
 	 *
 	 * @return the compteDao la valeur de la propriete.
 	 */
-	public ICompteDAO getCompteDao() {
-		return this.compteDao;
+	public ICompteDAO getCompteDAO() {
+		return this.compteDAO;
 	}
 
 	/**
@@ -45,8 +49,9 @@ public class CompteService extends AbstractService implements ICompteService {
 	 * @param pCompteDao
 	 *            la nouvelle valeur pour la propriete compteDao.
 	 */
-	public void setCompteDao(ICompteDAO pCompteDao) {
-		this.compteDao = pCompteDao;
+	@Autowired
+	public void setCompteDAO(ICompteDAO pCompteDao) {
+		this.compteDAO = pCompteDao;
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class CompteService extends AbstractService implements ICompteService {
 		}
 		ICompteEntity resultat = null;
 		try {
-			resultat = this.getCompteDao().select(unCompteId, null);
+			resultat = this.getCompteDAO().select(unCompteId, null);
 		} catch (ExceptionDao e) {
 			throw new ErreurTechniqueException(e);
 		}
@@ -85,7 +90,7 @@ public class CompteService extends AbstractService implements ICompteService {
 		}
 		List<ICompteEntity> resultat = new ArrayList<>();
 		try {
-			resultat = this.getCompteDao().selectAll(
+			resultat = this.getCompteDAO().selectAll(
 					"utilisateurId=" + unUtilisateurId, "libelle ASC", null);
 		} catch (ExceptionDao e) {
 			throw new ErreurTechniqueException(e);

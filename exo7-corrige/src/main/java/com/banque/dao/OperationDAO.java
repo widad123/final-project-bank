@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.banque.dao.ex.ExceptionDao;
 import com.banque.entity.IOperationEntity;
 import com.banque.entity.OperationEntity;
@@ -21,6 +23,7 @@ import com.banque.entity.OperationEntity;
 /**
  * Gestion des operations.
  */
+@Repository
 public class OperationDAO extends AbstractDAO<IOperationEntity> implements
 		IOperationDAO {
 
@@ -32,6 +35,15 @@ public class OperationDAO extends AbstractDAO<IOperationEntity> implements
 	public OperationDAO(String dbDriver, String dbUrl, String dbLogin, String dbPwd) {
 		super(dbDriver, dbUrl, dbLogin, dbPwd);
 	}
+	
+	
+
+	public OperationDAO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public String getTableName() {

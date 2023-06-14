@@ -5,6 +5,9 @@
  */
 package com.banque.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.banque.dao.IUtilisateurDAO;
 import com.banque.dao.UtilisateurDAO;
 import com.banque.dao.ex.ExceptionDao;
@@ -17,6 +20,7 @@ import com.banque.service.ex.UtilisateurInconnuException;
 /**
  * Gestion de l'authentification.
  */
+@Service
 public class AuthentificationService extends AbstractService implements
 IAuthentificationService {
 
@@ -34,6 +38,7 @@ IAuthentificationService {
 	 *
 	 * @return the utilisateurDAO la valeur de la propriete.
 	 */
+	
 	public IUtilisateurDAO getUtilisateurDao() {
 		return this.utilisateurDao;
 	}
@@ -44,6 +49,7 @@ IAuthentificationService {
 	 * @param pUtilisateurDAO
 	 *            la nouvelle valeur pour la propriete utilisateurDAO.
 	 */
+	@Autowired
 	public void setUtilisateurDao(IUtilisateurDAO pUtilisateurDAO) {
 		this.utilisateurDao = pUtilisateurDAO;
 	}

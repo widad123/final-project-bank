@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.banque.dao.CompteDAO;
+import org.springframework.stereotype.Service;
+
 import com.banque.dao.ICompteDAO;
 import com.banque.dao.IOperationDAO;
-import com.banque.dao.OperationDAO;
 import com.banque.dao.ex.ExceptionDao;
 import com.banque.entity.ICompteEntity;
 import com.banque.entity.IOperationEntity;
@@ -28,11 +28,12 @@ import com.banque.service.ex.ErreurTechniqueException;
 /**
  * Gestion des operations.
  */
+@Service
 public class OperationService extends AbstractService implements
 IOperationService {
 
 	private IOperationDAO operationDao;
-	private ICompteDAO compteDao;
+	private ICompteDAO compteDAO;
 
 	/**
 	 * Constructeur de l'objet.
@@ -47,8 +48,8 @@ IOperationService {
 	 *
 	 * @return the compteDao la valeur de la propriete.
 	 */
-	public ICompteDAO getCompteDao() {
-		return this.compteDao;
+	public ICompteDAO getCompteDAO() {
+		return this.compteDAO;
 	}
 
 	/**
@@ -57,8 +58,8 @@ IOperationService {
 	 * @param pCompteDao
 	 *            la nouvelle valeur pour la propriete compteDao.
 	 */
-	public void setCompteDao(ICompteDAO pCompteDao) {
-		this.compteDao = pCompteDao;
+	public void setCompteDAO(ICompteDAO pCompteDao) {
+		this.compteDAO = pCompteDao;
 	}
 
 	/**
@@ -97,7 +98,7 @@ IOperationService {
 		// On verifie que le compte appartient bien a l'utilisateur
 		ICompteEntity compte = null;
 		try {
-			compte = this.getCompteDao().select(unCompteId, null);
+			compte = this.getCompteDAO().select(unCompteId, null);
 		} catch (ExceptionDao e) {
 			throw new ErreurTechniqueException(e);
 		}
@@ -137,7 +138,7 @@ IOperationService {
 
 		ICompteEntity compte;
 		try {
-			compte = this.getCompteDao().select(unCompteId, null);
+			compte = this.getCompteDAO().select(unCompteId, null);
 		} catch (ExceptionDao e) {
 			throw new ErreurTechniqueException(e);
 		}
@@ -208,11 +209,11 @@ IOperationService {
 		Connection connexion = null;
 		boolean doCommit = false;
 		try {
-			connexion = this.getCompteDao().getConnexion();
+			connexion = this.getCompteDAO().getConnexion();
 			connexion.setAutoCommit(false);
 			ICompteEntity compteSrc = null;
 			try {
-				compteSrc = this.getCompteDao()
+				compteSrc = this.getCompteDAO()
 						.select(unCompteIdSrc, connexion);
 			} catch (ExceptionDao e) {
 				throw new ErreurTechniqueException(e);
@@ -225,7 +226,7 @@ IOperationService {
 			}
 			ICompteEntity compteDst = null;
 			try {
-				compteDst = this.getCompteDao()
+				compteDst = this.getCompteDAO()
 						.select(unCompteIdDst, connexion);
 			} catch (ExceptionDao e) {
 				throw new ErreurTechniqueException(e);
@@ -277,8 +278,8 @@ IOperationService {
 			opDst = this.getOperationDao().insert(opDst, connexion);
 			compteSrc.setSolde(Double.valueOf(soldeSrc));
 			compteDst.setSolde(Double.valueOf(soldeDst));
-			this.getCompteDao().update(compteSrc, connexion);
-			this.getCompteDao().update(compteDst, connexion);
+			this.getCompteDAO().update(compteSrc, connexion);
+			this.getCompteDAO().update(compteDst, connexion);
 
 			doCommit = true;
 		} catch (ExceptionDao e) {
